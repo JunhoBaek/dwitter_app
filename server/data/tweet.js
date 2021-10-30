@@ -1,19 +1,18 @@
 let tweets = [
   {
-    id: "1",
-    text: "드림코딩에서 강의 들으면 너무 좋으다1",
-    createdAt: "2021-05-09T04:20:57.000Z",
-    name: "Bob",
-    username: "bob",
-    url: "https://s.widgetwhats.com/user/1/anakin-1-120x120.png",
+    id: '1',
+    text: '드림코더분들 화이팅!',
+    createdAt: Date.now().toString(),
+    name: 'Bob',
+    username: 'bob',
+    url: 'https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-1.png',
   },
   {
-    id: "2",
-    text: "드림코딩에서 강의 들으면 너무 좋으다2",
-    createdAt: Date.now(),
-    name: "Ellie",
-    username: "ellie",
-    url: "https://s.widgetwhats.com/user/1/anakin-1-120x120.png",
+    id: '2',
+    text: '안뇽!',
+    createdAt: Date.now().toString(),
+    name: 'Ellie',
+    username: 'ellie',
   },
 ];
 
@@ -22,14 +21,14 @@ export async function getAll() {
 }
 
 export async function getAllByUsername(username) {
-  return tweets.filter((t) => t.username === username);
+  return tweets.filter((tweet) => tweet.username === username);
 }
 
 export async function getById(id) {
-  return tweets.find((t) => t.id === id);
+  return tweets.find((tweet) => tweet.id === id);
 }
 
-export async function create(text, username, name) {
+export async function create(text, name, username) {
   const tweet = {
     id: Date.now().toString(),
     text,
@@ -42,14 +41,13 @@ export async function create(text, username, name) {
 }
 
 export async function update(id, text) {
-  const tweet = tweets.find((t) => t.id === id);
+  const tweet = tweets.find((tweet) => tweet.id === id);
   if (tweet) {
     tweet.text = text;
   }
-
   return tweet;
 }
 
 export async function remove(id) {
-  tweets = tweets.filter((t) => t.id !== id);
+  tweets = tweets.filter((tweet) => tweet.id !== id);
 }
