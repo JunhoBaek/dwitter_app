@@ -48,14 +48,11 @@ request
 }
 ```
 
-response
+response(for test)
 
 ```
 {
-    id,
-    username,
-    text,
-    createdAt
+    [tweet, ...] (all tweets)
 }
 ```
 
