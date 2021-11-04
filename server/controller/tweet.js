@@ -1,38 +1,44 @@
 import * as tr from "../data/tweets.js";
 
-export function get(req, res, next) {
+export async function get(req, res, next) {
   const id = req.params.id;
   if (id) {
-    const tweet = tr.getById(parseInt(id));
-    return res.send(tweet);
-  }
-  const username = req.query.username;
-  if (username) {
-    const tweets = tr.getByUsername(username);
-    return res.send(tweets);
+    await tr.getById(parseInt(id)).then((tweet) => {
+      return res.send(tweet);
+    });
   } else {
-    const tweets = tr.getAll();
-    return res.send(tweets);
+    const username = req.query.username;
+    if (username) {
+      await tr.getByUsername(username).then((tweets) => {
+        return res.send(tweets);
+      });
+    } else {
+      await tr.getAll().then((tweets) => {
+        return res.send(tweets);
+      });
+    }
   }
 }
 
-export function create(req, res, next) {
+export async function create(req, res, next) {
   const { text, username } = req.body;
-  const tweets = tr.createTweet(text, username);
-  return res.send(tweets);
+  await tr.createTweet(text, username).then((tweets) => {
+    return res.send(tweets);
+  });
 }
 
-export function update(req, res, next) {
+export async function update(req, res, next) {
   const text = req.body.text;
   const id = parseInt(req.params.id);
-  const tweets = tr.updateTweet(text, id);
-  return res.send(tweets);
+  await tr.updateTweet(text, id).then((tweets) => {
+    return res.send(tweets);
+  });
 }
 
-export function remove(req, res, next) {
+export async function remove(req, res, next) {
   const id = parseInt(req.params.id);
 
-  const tweets = tr.deleteTweet(id);
-
-  res.send(tweets);
+  await tr.deleteTweet(id).then((tweets) => {
+    return res.send(tweets);
+  });
 }
