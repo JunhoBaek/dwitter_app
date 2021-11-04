@@ -1,12 +1,12 @@
 let tweets = [
   {
-    id: new Date().getTime(),
+    id: 123123,
     username: "ellie",
     text: "first tweet!",
     createdAt: new Date("December 17, 1995 03:24:00").toString(),
   },
   {
-    id: new Date().getTime() + 1,
+    id: 456456,
     username: "bob",
     text: "second tweet!",
     createdAt: new Date().toString(),
@@ -47,7 +47,6 @@ export function createTweet(text, username) {
 
 export function updateTweet(text, id) {
   const tweetIdx = tweets.findIndex((tweet) => tweet.id === id);
-
   tweets[tweetIdx].text = text;
 
   return tweets;
@@ -56,7 +55,7 @@ export function updateTweet(text, id) {
 export function deleteTweet(id) {
   const updatedTweet = tweets.filter((tweet) => tweet.id !== id);
 
-  tweets = updateTweet;
+  tweets = updatedTweet;
 
   return tweets;
 }

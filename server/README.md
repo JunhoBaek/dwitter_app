@@ -21,7 +21,7 @@ tweet
 }
 ```
 
-## GET /tweet?username=:username
+## GET /tweets?username=:username
 
 ```
 {
@@ -29,7 +29,7 @@ tweet
 }
 ```
 
-## GET /tweet?id=:id
+## GET /tweets/:id
 
 ```
 {
@@ -37,7 +37,7 @@ tweet
 }
 ```
 
-## POST /tweet
+## POST /tweets
 
 request
 
@@ -56,7 +56,7 @@ response(for test)
 }
 ```
 
-## PUT /tweet?id=:id
+## PUT /tweets/:id
 
 request
 
@@ -77,7 +77,7 @@ response
 }
 ```
 
-## DELETE /tweet?id=:id
+## DELETE /tweets/:id
 
 response(for test)
 
