@@ -3,6 +3,7 @@ import morgan from "morgan";
 import cors from "cors";
 import tweetRouter from "./router/tweet.js";
 import authRouter from "./router/auth.js";
+import config from "./config.js";
 
 const app = express();
 app.use(express.json());
@@ -12,4 +13,4 @@ app.use(morgan("tiny"));
 app.use("/tweets", tweetRouter);
 app.use("/auth", authRouter);
 
-app.listen(8080);
+app.listen(config.host.port);

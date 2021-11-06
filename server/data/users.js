@@ -8,8 +8,6 @@ let users = [
   },
 ];
 
-const priv = "51D!sGnC#2K9zYz4TFh5COrFIofL4VLs";
-
 export async function getUser(username) {
   return users.find((user) => user.username === username);
 }
@@ -22,8 +20,4 @@ export async function create(username, password, email) {
     email,
   };
   users = [userData, ...users];
-}
-
-export async function getKey() {
-  return priv;
 }
