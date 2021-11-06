@@ -86,3 +86,68 @@ response
     (no response)
 }
 ```
+
+# User API Document
+
+## Schema
+
+```
+{
+  id,
+  username,
+  password,
+  email
+}
+```
+
+## POST /auth/signup
+
+request
+
+```
+{
+  username,
+  password,
+  email
+}
+```
+
+response
+
+```
+{
+    token,
+    username
+}
+```
+
+## POST /auth/login
+
+request
+
+```
+{
+    username,
+    password
+}
+```
+
+response
+
+```
+{
+    token,
+    username
+}
+```
+
+## GET /auth/me
+
+response
+
+```
+{
+    token,
+    username
+}
+```
