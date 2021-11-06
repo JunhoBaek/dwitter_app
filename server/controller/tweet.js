@@ -22,16 +22,16 @@ export async function get(req, res, next) {
 
 export async function create(req, res, next) {
   const { text, username } = req.body;
-  await tr.createTweet(text, username).then((tweets) => {
-    return res.send(tweets);
+  await tr.createTweet(text, username).then((tweet) => {
+    return res.send(tweet);
   });
 }
 
 export async function update(req, res, next) {
   const text = req.body.text;
   const id = parseInt(req.params.id);
-  await tr.updateTweet(text, id).then((tweets) => {
-    return res.send(tweets);
+  await tr.updateTweet(text, id).then((tweet) => {
+    return res.send(tweet);
   });
 }
 

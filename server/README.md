@@ -48,11 +48,11 @@ request
 }
 ```
 
-response(for test)
+response
 
 ```
 {
-    [tweet, ...] (all tweets)
+    tweet
 }
 ```
 
@@ -79,10 +79,10 @@ response
 
 ## DELETE /tweets/:id
 
-response(for test)
+response
 
 ```
 {
-    [tweet, ...] (all tweets)
+    (no response)
 }
 ```

@@ -42,14 +42,13 @@ export async function createTweet(text, username) {
   };
   tweets = [tweet, ...tweets];
 
-  return tweets;
+  return tweet;
 }
 
 export async function updateTweet(text, id) {
   const tweetIdx = tweets.findIndex((tweet) => tweet.id === id);
   tweets[tweetIdx].text = text;
-
-  return tweets;
+  return tweets[tweetIdx];
 }
 
 export async function deleteTweet(id) {
