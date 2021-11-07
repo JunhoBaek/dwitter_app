@@ -1,20 +1,28 @@
 import * as tr from "../data/tweets.js";
 
 export async function get(req, res, next) {
-  const id = req.params.id;
+  const id = parseInt(req.params.id);
   if (id) {
-    await tr.getById(parseInt(id)).then((tweet) => {
-      return res.send(tweet);
+    await tr.getById(id).then((tweet) => {
+      if (tweet) {
+        return res.status(200).send(tweet);
+      } else {
+        return res.status(404).send("Tweet Not Found");
+      }
     });
   } else {
     const username = req.query.username;
     if (username) {
       await tr.getByUsername(username).then((tweets) => {
-        return res.send(tweets);
+        if (tweets.length !== 0) {
+          return res.status(200).send(tweets);
+        } else {
+          return res.status(404).send("Tweets Not Found");
+        }
       });
     } else {
       await tr.getAll().then((tweets) => {
-        return res.send(tweets);
+        return res.status(200).send(tweets);
       });
     }
   }
@@ -23,7 +31,7 @@ export async function get(req, res, next) {
 export async function create(req, res, next) {
   const { text, username } = req.body;
   await tr.createTweet(text, username).then((tweet) => {
-    return res.send(tweet);
+    return res.status(201).send(tweet);
   });
 }
 
@@ -31,14 +39,23 @@ export async function update(req, res, next) {
   const text = req.body.text;
   const id = parseInt(req.params.id);
   await tr.updateTweet(text, id).then((tweet) => {
-    return res.send(tweet);
+    if (tweet) {
+      return res.status(201).send(tweet);
+    } else {
+      return res.status(404).send("Tweet Not Found");
+    }
   });
 }
 
 export async function remove(req, res, next) {
   const id = parseInt(req.params.id);
 
-  await tr.deleteTweet(id).then((tweets) => {
-    return res.send(tweets);
+  await tr.deleteTweet(id).then((result) => {
+    console.log(result);
+    if (result) {
+      return res.status(200).send("Success");
+    } else {
+      return res.status(204).send("Fail");
+    }
   });
 }

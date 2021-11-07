@@ -47,14 +47,21 @@ export async function createTweet(text, username) {
 
 export async function updateTweet(text, id) {
   const tweetIdx = tweets.findIndex((tweet) => tweet.id === id);
-  tweets[tweetIdx].text = text;
-  return tweets[tweetIdx];
+  if (tweetIdx !== -1) {
+    tweets[tweetIdx].text = text;
+    return tweets[tweetIdx];
+  } else {
+    return null;
+  }
 }
 
 export async function deleteTweet(id) {
-  const updatedTweet = tweets.filter((tweet) => tweet.id !== id);
-
-  tweets = updatedTweet;
-
-  return tweets;
+  const tweetIdx = tweets.findIndex((tweet) => tweet.id === id);
+  if (tweetIdx !== -1) {
+    const updatedTweet = tweets.filter((tweet) => tweet.id !== id);
+    tweets = updatedTweet;
+    return true;
+  } else {
+    return false;
+  }
 }
