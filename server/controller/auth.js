@@ -5,7 +5,7 @@ import config from "../config.js";
 
 export async function signup(req, res, next) {
   const { username, password, email } = req.body;
-  const hashed = await bcrypt.hash(password, 10);
+  const hashed = await bcrypt.hash(password, parseInt(config.jwt.salt));
   await ur.create(username, hashed, email);
 
   const privkey = config.jwt.priv;
@@ -21,19 +21,23 @@ export async function signup(req, res, next) {
 export async function login(req, res, next) {
   const { username, password } = req.body;
   const userData = await ur.getUser(username);
-  const result = await bcrypt.compare(password, userData.password);
-  const privkey = config.jwt.priv;
-  if (result) {
-    const token = jwt.sign(
-      {
+  if (userData) {
+    const result = await bcrypt.compare(password, userData.password);
+    const privkey = config.jwt.priv;
+    if (result) {
+      const token = jwt.sign(
+        {
+          username,
+        },
+        privkey
+      );
+      res.json({
+        token,
         username,
-      },
-      privkey
-    );
-    res.json({
-      token,
-      username,
-    });
+      });
+    }
+  } else {
+    res.status(204).send("User not found");
   }
 }
 

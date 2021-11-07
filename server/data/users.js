@@ -9,7 +9,8 @@ let users = [
 ];
 
 export async function getUser(username) {
-  return users.find((user) => user.username === username);
+  const result = users.find((user) => user.username === username);
+  return result;
 }
 
 export async function create(username, password, email) {
