@@ -7,7 +7,7 @@ export async function get(req, res, next) {
       if (tweet) {
         return res.status(200).send(tweet);
       } else {
-        return res.status(404).send("Tweet Not Found");
+        return res.sendStatus(404);
       }
     });
   } else {
@@ -17,7 +17,7 @@ export async function get(req, res, next) {
         if (tweets.length !== 0) {
           return res.status(200).send(tweets);
         } else {
-          return res.status(404).send("Tweets Not Found");
+          return res.sendStatus(404);
         }
       });
     } else {
@@ -42,7 +42,7 @@ export async function update(req, res, next) {
     if (tweet) {
       return res.status(201).send(tweet);
     } else {
-      return res.status(404).send("Tweet Not Found");
+      return res.sendStatus(404);
     }
   });
 }
@@ -53,9 +53,9 @@ export async function remove(req, res, next) {
   await tr.deleteTweet(id).then((result) => {
     console.log(result);
     if (result) {
-      return res.status(200).send("Success");
+      return res.status(204).send("Success");
     } else {
-      return res.status(204).send("Fail");
+      return res.status(404).send("Fail");
     }
   });
 }

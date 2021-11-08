@@ -46,15 +46,16 @@ export async function createTweet(text, username) {
 }
 
 export async function updateTweet(text, id) {
-  const tweetIdx = tweets.findIndex((tweet) => tweet.id === id);
-  if (tweetIdx !== -1) {
-    tweets[tweetIdx].text = text;
-    return tweets[tweetIdx];
+  const tweet = tweets.find((tweet) => tweet.id === id);
+  if (tweet) {
+    tweet.text = text;
+    return tweet;
   } else {
     return null;
   }
 }
 
+////TODO!!!
 export async function deleteTweet(id) {
   const tweetIdx = tweets.findIndex((tweet) => tweet.id === id);
   if (tweetIdx !== -1) {
