@@ -55,7 +55,6 @@ export async function updateTweet(text, id) {
   }
 }
 
-////TODO!!!
 export async function deleteTweet(id) {
   const tweetIdx = tweets.findIndex((tweet) => tweet.id === id);
   if (tweetIdx !== -1) {
