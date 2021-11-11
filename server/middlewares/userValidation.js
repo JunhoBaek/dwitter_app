@@ -2,6 +2,7 @@ import * as validator from "express-validator";
 
 const validate = (req, res, next) => {
   const err = validator.validationResult(req);
+
   if (err.isEmpty()) {
     next();
   } else {
@@ -9,11 +10,12 @@ const validate = (req, res, next) => {
   }
 };
 
-export const validateTweet = [
+export const validateUser = [
   validator
-    .body("text")
+    .body("username")
     .trim()
-    .isLength({ min: 3 })
-    .withMessage("Text is too short!"),
+    .isLength({ min: 2 })
+    .withMessage("Name is too short!"),
+  validator.body("email").trim().isEmail().withMessage("Invalid Email!"),
   validate,
 ];

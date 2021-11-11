@@ -13,6 +13,6 @@ router.post("/", validateTweet, tweetController.create);
 
 router.put("/:id", validateTweet, tweetController.update);
 
-router.delete("/:id", tweetCon + troller.remove);
+router.delete("/:id", tweetController.remove);
 
 export default router;
