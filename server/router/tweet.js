@@ -1,6 +1,7 @@
 import express from "express";
 import "express-async-errors";
 import * as tweetController from "../controller/tweet.js";
+import { validateTweet } from "../middlewares/tweetValidation.js";
 
 const router = express.Router();
 
@@ -8,10 +9,10 @@ router.get("/", tweetController.get);
 
 router.get("/:id", tweetController.get);
 
-router.post("/", tweetController.create);
+router.post("/", validateTweet, tweetController.create);
 
-router.put("/:id", tweetController.update);
+router.put("/:id", validateTweet, tweetController.update);
 
-router.delete("/:id", tweetController.remove);
+router.delete("/:id", tweetCon + troller.remove);
 
 export default router;

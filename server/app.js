@@ -5,6 +5,7 @@ import tweetRouter from "./router/tweet.js";
 import authRouter from "./router/auth.js";
 import config from "./config.js";
 import helmet from "helmet";
+import * as validator from "express-validator";
 import "express-async-errors";
 
 const app = express();
