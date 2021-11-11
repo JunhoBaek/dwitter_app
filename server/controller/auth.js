@@ -5,13 +5,17 @@ import config from "../config.js";
 
 export async function signup(req, res, next) {
   const { username, password, email } = req.body;
+  const userData = await ur.getUser(username);
+  if (userData) {
+    return res.status(409).send("User already exists.");
+  }
   const hashed = await bcrypt.hash(password, parseInt(config.jwt.salt));
-  await ur.create(username, hashed, email);
+  const userId = await ur.create(username, hashed, email);
 
   const privkey = config.jwt.priv;
   const token = jwt.sign(
     {
-      username,
+      userId,
     },
     privkey
   );
@@ -22,12 +26,13 @@ export async function login(req, res, next) {
   const { username, password } = req.body;
   const userData = await ur.getUser(username);
   if (userData) {
+    const userId = userData.id;
     const result = await bcrypt.compare(password, userData.password);
     const privkey = config.jwt.priv;
     if (result) {
       const token = jwt.sign(
         {
-          username,
+          userId,
         },
         privkey
       );
@@ -37,7 +42,7 @@ export async function login(req, res, next) {
       });
     }
   } else {
-    res.status(204).send("User not found");
+    res.status(401).send("User not found");
   }
 }
 

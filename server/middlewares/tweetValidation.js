@@ -1,7 +1,7 @@
-import * as validator from "express-validator";
+import { body, validationResult } from "express-validator";
 
 const validate = (req, res, next) => {
-  const err = validator.validationResult(req);
+  const err = validationResult(req);
   if (err.isEmpty()) {
     next();
   } else {
@@ -10,10 +10,6 @@ const validate = (req, res, next) => {
 };
 
 export const validateTweet = [
-  validator
-    .body("text")
-    .trim()
-    .isLength({ min: 3 })
-    .withMessage("Text is too short!"),
+  body("text").trim().isLength({ min: 3 }).withMessage("Text is too short!"),
   validate,
 ];

@@ -1,15 +1,16 @@
+let idx = 2;
 let tweets = [
   {
-    id: 123123,
-    username: "ellie",
-    text: "first tweet!",
-    createdAt: new Date("December 17, 1995 03:24:00").toString(),
-  },
-  {
-    id: 456456,
+    id: 1,
     username: "bob",
     text: "second tweet!",
     createdAt: new Date().toString(),
+  },
+  {
+    id: 0,
+    username: "ellie",
+    text: "first tweet!",
+    createdAt: new Date("December 17, 1995 03:24:00").toString(),
   },
 ];
 
@@ -35,14 +36,14 @@ export async function getById(id) {
 
 export async function createTweet(text, username) {
   const tweet = {
-    id: new Date().getTime(),
+    id: idx,
     username,
     text,
     createdAt: new Date().toString(),
   };
   tweets = [tweet, ...tweets];
-
-  return tweet;
+  idx++;
+  return tweet.id;
 }
 
 export async function updateTweet(text, id) {

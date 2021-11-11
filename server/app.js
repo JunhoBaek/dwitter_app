@@ -7,6 +7,7 @@ import config from "./config.js";
 import helmet from "helmet";
 import * as validator from "express-validator";
 import "express-async-errors";
+process.setMaxListeners(15);
 
 const app = express();
 app.use(express.json());

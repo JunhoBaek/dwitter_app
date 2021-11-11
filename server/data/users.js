@@ -1,3 +1,4 @@
+let idx = 1;
 let users = [
   {
     id: 0,
@@ -15,10 +16,12 @@ export async function getUser(username) {
 
 export async function create(username, password, email) {
   const userData = {
-    id: new Date().getTime(),
+    id: idx,
     username,
     password,
     email,
   };
   users = [userData, ...users];
+  idx++;
+  return userData.id;
 }

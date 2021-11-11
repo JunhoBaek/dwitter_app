@@ -1,7 +1,7 @@
-import * as validator from "express-validator";
+import { body, validationResult } from "express-validator";
 
 const validate = (req, res, next) => {
-  const err = validator.validationResult(req);
+  const err = validationResult(req);
 
   if (err.isEmpty()) {
     next();
@@ -11,11 +11,10 @@ const validate = (req, res, next) => {
 };
 
 export const validateUser = [
-  validator
-    .body("username")
+  body("username")
     .trim()
     .isLength({ min: 2 })
     .withMessage("Name is too short!"),
-  validator.body("email").trim().isEmail().withMessage("Invalid Email!"),
+  body("email").trim().normalizeEmail().isEmail().withMessage("Invalid Email!"),
   validate,
 ];
