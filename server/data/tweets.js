@@ -3,12 +3,14 @@ let tweets = [
   {
     id: 1,
     username: "bob",
+    userId: 0,
     text: "second tweet!",
     createdAt: new Date().toString(),
   },
   {
     id: 0,
     username: "ellie",
+    userId: 1,
     text: "first tweet!",
     createdAt: new Date("December 17, 1995 03:24:00").toString(),
   },

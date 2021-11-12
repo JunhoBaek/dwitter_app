@@ -9,6 +9,11 @@ let users = [
   },
 ];
 
+export async function getUserById(id) {
+  const result = users.find((user) => user.id === id);
+  return result;
+}
+
 export async function getUser(username) {
   const result = users.find((user) => user.username === username);
   return result;

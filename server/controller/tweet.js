@@ -40,6 +40,9 @@ export async function update(req, res, next) {
   const id = parseInt(req.params.id);
   await tr.updateTweet(text, id).then((tweet) => {
     if (tweet) {
+      if (tweet.userId != req.userId) {
+        return res.sendStatus(401);
+      }
       return res.status(201).send(tweet);
     } else {
       return res.sendStatus(404);
@@ -49,7 +52,10 @@ export async function update(req, res, next) {
 
 export async function remove(req, res, next) {
   const id = parseInt(req.params.id);
-
+  const tweet = tr.getById(id);
+  if (tweet.userId != req.userId) {
+    return res.sendStatus(401);
+  }
   await tr.deleteTweet(id).then((result) => {
     if (result) {
       return res.status(204).send("Success");

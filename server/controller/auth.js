@@ -32,7 +32,7 @@ export async function login(req, res, next) {
     if (result) {
       const token = jwt.sign(
         {
-          userId,
+          id: userId,
         },
         privkey
       );
@@ -47,13 +47,9 @@ export async function login(req, res, next) {
 }
 
 export async function me(req, res, next) {
-  const authHeader = req.header("Authorization").split(" ")[1];
-  const privkey = config.jwt.priv;
-  const result = jwt.verify(authHeader, privkey);
-  if (result) {
-    res.json({
-      token: authHeader,
-      username: result.username,
-    });
-  }
+  const user = await ur.getUserById(parseInt(req.userId));
+  res.json({
+    token: req.token,
+    username: user.username,
+  });
 }
