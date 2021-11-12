@@ -1,3 +1,5 @@
+///TODO   id 숫자 말고 문자열로 수정!
+
 let idx = 2;
 let tweets = [
   {
