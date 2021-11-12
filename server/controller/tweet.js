@@ -51,7 +51,6 @@ export async function remove(req, res, next) {
   const id = parseInt(req.params.id);
 
   await tr.deleteTweet(id).then((result) => {
-    console.log(result);
     if (result) {
       return res.status(204).send("Success");
     } else {
