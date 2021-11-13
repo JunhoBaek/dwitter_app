@@ -1,18 +1,16 @@
-///TODO   id 숫자 말고 문자열로 수정!
-
 let idx = 2;
 let tweets = [
   {
-    id: 1,
+    id: "1",
     username: "bob",
-    userId: 0,
+    userId: "0",
     text: "second tweet!",
     createdAt: new Date().toString(),
   },
   {
-    id: 0,
+    id: "0",
     username: "ellie",
-    userId: 1,
+    userId: "1",
     text: "first tweet!",
     createdAt: new Date("December 17, 1995 03:24:00").toString(),
   },
@@ -38,10 +36,11 @@ export async function getById(id) {
   });
 }
 
-export async function createTweet(text, username) {
+export async function createTweet(text, username, userId) {
   const tweet = {
-    id: idx,
+    id: String(idx),
     username,
+    userId,
     text,
     createdAt: new Date().toString(),
   };

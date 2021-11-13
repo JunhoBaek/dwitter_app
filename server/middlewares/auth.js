@@ -14,7 +14,7 @@ const isAuth = (req, res, next) => {
     if (err) {
       return res.status(401).send(err);
     }
-    req.userId = parseInt(decoded.id);
+    req.userId = decoded.id;
     req.token = authToken;
     next();
   });

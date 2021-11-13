@@ -1,9 +1,7 @@
-///TODO   id 숫자 말고 문자열로 수정!
-
 let idx = 1;
 let users = [
   {
-    id: 0,
+    id: "0",
     username: "bob",
     ///abc123 salt 10
     password: "$2b$10$bMw..hP.BNgM24xWnuPAx.adEkYTvWM/F/Rxkr5SwOM2A82hMxzfe",
@@ -23,7 +21,7 @@ export async function getUser(username) {
 
 export async function create(username, password, email) {
   const userData = {
-    id: idx,
+    id: String(idx),
     username,
     password,
     email,

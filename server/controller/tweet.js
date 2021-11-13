@@ -1,7 +1,8 @@
+import { urlencoded } from "express";
 import * as tr from "../data/tweets.js";
 
 export async function get(req, res, next) {
-  const id = parseInt(req.params.id);
+  const id = req.params.id;
   if (id) {
     await tr.getById(id).then((tweet) => {
       if (tweet) {
@@ -30,17 +31,18 @@ export async function get(req, res, next) {
 
 export async function create(req, res, next) {
   const { text, username } = req.body;
-  await tr.createTweet(text, username).then(() => {
+  tr.createTweet(text, username, req.userId).then(() => {
     return res.sendStatus(201);
   });
 }
 
 export async function update(req, res, next) {
   const text = req.body.text;
-  const id = parseInt(req.params.id);
-  await tr.updateTweet(text, id).then((tweet) => {
+  const id = req.params.id;
+  tr.updateTweet(text, id).then((tweet) => {
     if (tweet) {
-      if (tweet.userId != req.userId) {
+      if (tweet.userId !== req.userId) {
+        console.log(tweet.userId, req.userId);
         return res.sendStatus(401);
       }
       return res.status(201).send(tweet);
@@ -51,12 +53,13 @@ export async function update(req, res, next) {
 }
 
 export async function remove(req, res, next) {
-  const id = parseInt(req.params.id);
-  const tweet = tr.getById(id);
-  if (tweet.userId != req.userId) {
+  const id = req.params.id;
+  const tweet = await tr.getById(id);
+  if (tweet.userId !== req.userId) {
+    console.log(tweet.userId, req.userId);
     return res.sendStatus(401);
   }
-  await tr.deleteTweet(id).then((result) => {
+  tr.deleteTweet(id).then((result) => {
     if (result) {
       return res.status(204).send("Success");
     } else {
