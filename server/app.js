@@ -1,12 +1,13 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import helmet from "helmet";
+import "express-validator";
+import "express-async-errors";
 import tweetRouter from "./router/tweet.js";
 import authRouter from "./router/auth.js";
 import config from "./config.js";
-import helmet from "helmet";
-import * as validator from "express-validator";
-import "express-async-errors";
+import { db } from "./db/database.js";
 process.setMaxListeners(15);
 
 const app = express();
@@ -25,6 +26,10 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   console.log(err);
   res.sendStatus(500);
+});
+
+db.getConnection().then((connection) => {
+  console.log(connection);
 });
 
 app.listen(config.host.port);
