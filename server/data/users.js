@@ -1,32 +1,27 @@
-let idx = 1;
-let users = [
-  {
-    id: "0",
-    username: "bob",
-    ///abc123 salt 10
-    password: "$2b$10$bMw..hP.BNgM24xWnuPAx.adEkYTvWM/F/Rxkr5SwOM2A82hMxzfe",
-    email: "bob@naver.com",
-  },
-];
+import { db } from "../db/database.js";
 
 export async function getUserById(id) {
-  const result = users.find((user) => user.id === id);
-  return result;
+  return db.execute("SELECT * FROM users WHERE id=?", [id]).then((result) => {
+    return result[0][0];
+  });
 }
 
 export async function getUser(username) {
-  const result = users.find((user) => user.username === username);
-  return result;
+  return db
+    .execute("SELECT * FROM users WHERE username=?", [username])
+    .then((result) => {
+      return result[0][0];
+    });
 }
 
 export async function create(username, password, email) {
-  const userData = {
-    id: String(idx),
-    username,
-    password,
-    email,
-  };
-  users = [userData, ...users];
-  idx++;
-  return userData.id;
+  return db
+    .execute("INSERT INTO users (username, password, email) VALUES (?, ?, ?)", [
+      username,
+      password,
+      email,
+    ])
+    .then((result) => {
+      return result[0].insertId;
+    });
 }

@@ -47,7 +47,6 @@ export async function login(req, res, next) {
 }
 
 export async function me(req, res, next) {
-  console.log(req.userId);
   const user = await ur.getUserById(req.userId);
   res.json({
     token: req.token,

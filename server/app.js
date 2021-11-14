@@ -28,8 +28,6 @@ app.use((err, req, res, next) => {
   res.sendStatus(500);
 });
 
-db.getConnection().then((connection) => {
-  console.log(connection);
-});
+await db.getConnection();
 
 app.listen(config.host.port);
