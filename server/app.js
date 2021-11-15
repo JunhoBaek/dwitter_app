@@ -7,7 +7,7 @@ import "express-async-errors";
 import tweetRouter from "./router/tweet.js";
 import authRouter from "./router/auth.js";
 import config from "./config.js";
-import { db } from "./db/database.js";
+import { db, sequelize } from "./db/database.js";
 process.setMaxListeners(15);
 
 const app = express();
@@ -28,6 +28,6 @@ app.use((err, req, res, next) => {
   res.sendStatus(500);
 });
 
-await db.getConnection();
-
-app.listen(config.host.port);
+sequelize.sync().then((client) => {
+  app.listen(config.host.port);
+});
