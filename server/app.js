@@ -7,7 +7,7 @@ import "express-async-errors";
 import tweetRouter from "./router/tweet.js";
 import authRouter from "./router/auth.js";
 import config from "./config.js";
-import { db, sequelize } from "./db/database.js";
+import { sequelize } from "./db/database.js";
 process.setMaxListeners(15);
 
 const app = express();
