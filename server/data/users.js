@@ -5,7 +5,7 @@ let users = [
     username: "bob",
     ///abc123 salt 10
     password: "$2b$10$bMw..hP.BNgM24xWnuPAx.adEkYTvWM/F/Rxkr5SwOM2A82hMxzfe",
-    email: "bob@naver.com",
+    email: "bob1@naver.com",
   },
 ];
 
