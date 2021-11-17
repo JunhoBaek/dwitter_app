@@ -7,6 +7,7 @@ import config from "./config.js";
 import helmet from "helmet";
 import * as validator from "express-validator";
 import "express-async-errors";
+import { connectDB } from "./database/database.js";
 process.setMaxListeners(15);
 
 const app = express();
@@ -27,4 +28,7 @@ app.use((err, req, res, next) => {
   res.sendStatus(500);
 });
 
-app.listen(config.host.port);
+connectDB().then((db) => {
+  console.log(db);
+  app.listen(config.host.port);
+});
